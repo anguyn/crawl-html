@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Crawler</title>
 </head>
+
 <body>
     <h1>Enter URL to Crawl</h1>
     <button onclick="promptForURL()">Enter URL</button>
@@ -21,31 +23,32 @@
                     },
                     body: JSON.stringify({ url: url }),
                 })
-                .then(response => {
-                    if (response.ok) {
-                        // Start downloading the file directly
-                        return response.blob();  // Get the response as a Blob
-                    } else {
-                        throw new Error("Failed to crawl the content.");
-                    }
-                })
-                .then(blob => {
-                    // Create a URL for the blob and trigger download
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = 'output.txt';  // Set the filename
-                    document.body.appendChild(a);
-                    a.click();  // Programmatically click the link to trigger download
-                    window.URL.revokeObjectURL(url);  // Clean up
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An error occurred while processing the request: " + error.message);
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            // Start downloading the file directly
+                            return response.blob();  // Get the response as a Blob
+                        } else {
+                            throw new Error("Failed to crawl the content.");
+                        }
+                    })
+                    .then(blob => {
+                        // Create a URL for the blob and trigger download
+                        const blobUrl = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = blobUrl;
+                        a.download = 'output.txt';  // Set the filename
+                        document.body.appendChild(a);
+                        a.click();  // Programmatically click the link to trigger download
+                        window.URL.revokeObjectURL(blobUrl);  // Clean up
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred while processing the request: " + error.message);
+                    });
             }
         }
     </script>
 </body>
+
 </html>
