@@ -121,22 +121,12 @@ app.post('/crawl-google-sheet-integrated', async (req, res) => {
             }
         });
 
-        // Save content to a .txt file
-        const outputFilePath = path.join(__dirname, 'output.txt');
-        fs.writeFile(outputFilePath, bodyContent, (err) => {
-            if (err) {
-                console.error('Error writing to file:', err);
-                return res.status(500).send({ message: 'Failed to save content.' });
-            }
-            console.log('Content saved to output.txt');
-
-            // Determine response
-            if (matchingLinks.length > 0) {
-                return res.send({ message: 'Links found!', links: matchingLinks });
-            } else {
-                return res.send({ message: 'No matching links found. Crawled URL:', crawledUrl: url });
-            }
-        });
+        // Determine response
+        if (matchingLinks.length > 0) {
+            return res.send({ message: 'Links found!', links: matchingLinks });
+        } else {
+            return res.send({ message: 'No matching links found.', crawledUrl: url });
+        }
     } catch (error) {
         console.error(`Error fetching the URL: ${error.message}`);
         res.status(500).send({ message: 'Failed to fetch content.' });
