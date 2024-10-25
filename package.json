@@ -1,0 +1,26 @@
+{
+  "name": "crawl-html",
+  "version": "1.0.0",
+  "description": "Crawl html by pass cors",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "html",
+    "crawl",
+    "chaunguyen"
+  ],
+  "author": "Chau Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
